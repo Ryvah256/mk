@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambidextrous Project Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    :root {
+        --primary: #4f46e5;
+        --primary-dark: #4338ca;
+        --primary-light: #6366f1;
+        --dark: #1e293b;
+        --darker: #0f172a;
+        --darkest: #020617;
+        --light: #f8fafc;
+        --gray: #94a3b8;
+        --gray-light: #cbd5e1;
+        --gray-dark: #64748b;
+        --white: #ffffff;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        --radius: 0.5rem;
+        --radius-lg: 0.75rem;
+        --radius-xl: 1rem;
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+        --spacing-2xl: 3rem;
+        --font-heading: 'Playfair Display', serif;
+        --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-body);
+        background-color: var(--light);
+        color: var(--dark);
+        line-height: 1.6;
+        font-size: 16px;
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-lg);
+    }
+
+    .container-fluid {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-xl);
+    }
+
+    /* Header Styles */
+    .header {
+        background: linear-gradient(135deg, var(--darkest) 0%, var(--darker) 100%);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: var(--shadow-lg);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 72px;
+        padding: var(--spacing-md) 0;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        flex-shrink: 0;
+    }
+
+    .logo {
+        height: 48px;
+        width: auto;
+        transition: var(--transition);
+        filter: brightness(1.1);
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
+        filter: brightness(1.2);
+    }
+
+    .brand-name {
+        color: var(--white);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        letter-spacing: -0.025em;
+        white-space: nowrap;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .brand-name sup {
+        font-size: 0.6em;
+        font-weight: 400;
+        color: var(--primary-light);
+        margin-left: 0.25rem;
+    }
+
+    .nav-container {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xl);
+        margin-left: auto;
+    }
+
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: var(--spacing-lg);
+        align-items: center;
+    }
+
+    .nav-item {
+        position: relative;
+    }
+
+    .nav-link {
+        color: var(--gray-light);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius);
+        transition: var(--transition);
+        white-space: nowrap;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--white);
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+    }
+
+    .nav-link.active::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        border-radius: 2px;
+    }
+
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-icon {
+        font-size: 0.75rem;
+        transition: var(--transition);
+    }
+
+    .dropdown:hover .dropdown-icon {
+        transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 240px;
+        background: rgba(30, 41, 59, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-md);
+        box-shadow: var(--shadow-xl);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) translateY(-8px);
+        transition: var(--transition);
+        z-index: 100;
+    }
+
+    .dropdown:hover .dropdown-content {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-link {
+        display: block;
+        padding: var(--spacing-sm) var(--spacing-md);
+        color: var(--gray-light);
+        text-decoration: none;
+        border-radius: var(--radius);
+        transition: var(--transition);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .dropdown-link:hover {
+        color: var(--white);
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateX(4px);
+    }
+
+    .dropdown-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        margin: var(--spacing-sm) 0;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        cursor: pointer;
+        position: relative;
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-lg);
+        transition: var(--transition);
+        border: 1px solid transparent;
+    }
+
+    .user-profile:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--primary);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+
+    .user-profile:hover .profile-avatar {
+        border-color: var(--primary-light);
+        transform: scale(1.05);
+    }
+
+    .profile-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-name {
+        color: var(--white);
+        font-weight: 600;
+        font-size: 0.9rem;
+        line-height: 1.2;
+    }
+
+    .profile-role {
+        color: var(--gray);
+        font-size: 0.75rem;
+        font-weight: 400;
+    }
+
+    .profile-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        min-width: 200px;
+        background: rgba(30, 41, 59, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-md);
+        box-shadow: var(--shadow-xl);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: var(--transition);
+        z-index: 100;
+    }
+
+    .user-profile:hover .profile-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .profile-dropdown-header {
+        padding: var(--spacing-sm) 0 var(--spacing-md) 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .profile-dropdown-header .profile-name {
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .profile-dropdown-header .profile-role {
+        font-size: 0.8rem;
+    }
+
+    .profile-dropdown-link {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm) var(--spacing-md);
+        color: var(--gray-light);
+        text-decoration: none;
+        border-radius: var(--radius);
+        transition: var(--transition);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .profile-dropdown-link:hover {
+        color: var(--white);
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateX(4px);
+    }
+
+    .profile-dropdown-link i {
+        width: 16px;
+        font-size: 0.85rem;
+    }
+
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: var(--spacing-sm);
+        border-radius: var(--radius);
+        transition: var(--transition);
+        margin-left: var(--spacing-md);
+    }
+
+    .mobile-menu-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-menu {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 72px);
+        background: linear-gradient(135deg, var(--darkest) 0%, var(--darker) 100%);
+        z-index: 999;
+        padding: var(--spacing-xl);
+        transform: translateX(-100%);
+        transition: var(--transition);
+        overflow-y: auto;
+        backdrop-filter: blur(10px);
+    }
+
+    .mobile-menu.active {
+        transform: translateX(0);
+    }
+
+    .mobile-nav-menu {
+        list-style: none;
+        padding-top: var(--spacing-lg);
+    }
+
+    .mobile-nav-item {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .mobile-nav-link {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        padding: var(--spacing-lg);
+        color: var(--gray-light);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        border-radius: var(--radius-lg);
+        transition: var(--transition);
+        border: 1px solid transparent;
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+        color: var(--white);
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateX(8px);
+    }
+
+    .mobile-nav-link i {
+        width: 20px;
+        font-size: 1rem;
+    }
+
+    .mobile-dropdown-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--spacing-lg);
+        background: none;
+        border: 1px solid transparent;
+        color: var(--gray-light);
+        font-weight: 500;
+        font-size: 1.1rem;
+        cursor: pointer;
+        border-radius: var(--radius-lg);
+        transition: var(--transition);
+        font-family: var(--font-body);
+    }
+
+    .mobile-dropdown-btn:hover {
+        color: var(--white);
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile-dropdown-btn .dropdown-icon {
+        transition: var(--transition);
+    }
+
+    .mobile-dropdown-btn.active .dropdown-icon {
+        transform: rotate(180deg);
+    }
+
+    .mobile-dropdown-content {
+        padding-left: var(--spacing-xl);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mobile-dropdown-content.active {
+        max-height: 400px;
+        padding-top: var(--spacing-md);
+    }
+
+    .mobile-dropdown-link {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md) var(--spacing-lg);
+        color: var(--gray);
+        text-decoration: none;
+        border-radius: var(--radius);
+        transition: var(--transition);
+        font-size: 1rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .mobile-dropdown-link:hover {
+        color: var(--white);
+        background-color: rgba(255, 255, 255, 0.05);
+        transform: translateX(8px);
+    }
+
+    .mobile-user-section {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: var(--spacing-xl);
+        padding-top: var(--spacing-xl);
+    }
+
+    .mobile-user-profile {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        padding: var(--spacing-lg);
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .scroll-top-btn {
+        position: fixed;
+        bottom: var(--spacing-xl);
+        right: var(--spacing-xl);
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: var(--white);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        z-index: 99;
+        font-size: 1.25rem;
+    }
+
+    .scroll-top-btn:hover {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-xl);
+    }
+
+    .scroll-top-btn.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Main Content */
+    .main-content {
+        min-height: calc(100vh - 72px - 200px);
+        padding: var(--spacing-2xl) 0;
+    }
+
+    .hero-section {
+        text-align: center;
+        padding: var(--spacing-2xl) 0;
+        background: linear-gradient(135deg, var(--light) 0%, #e2e8f0 100%);
+        border-radius: var(--radius-xl);
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    .hero-title {
+        font-family: var(--font-heading);
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: var(--spacing-lg);
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+        color: var(--gray-dark);
+        margin-bottom: var(--spacing-xl);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-lg) var(--spacing-2xl);
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: var(--white);
+        text-decoration: none;
+        border-radius: var(--radius-lg);
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+    }
+
+    .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    }
+
+    /* Footer Styles */
+    .footer {
+        background: linear-gradient(135deg, var(--darkest) 0%, var(--darker) 100%);
+        color: var(--gray-light);
+        padding: var(--spacing-2xl) 0 var(--spacing-xl) 0;
+        margin-top: var(--spacing-2xl);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-2xl);
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    .footer-col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .footer-logo img {
+        height: 48px;
+        filter: brightness(1.1);
+    }
+
+    .footer-logo-text {
+        color: var(--white);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--gray);
+        max-width: 400px;
+    }
+
+    .footer-title {
+        color: var(--white);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-lg);
+        position: relative;
+    }
+
+    .footer-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        border-radius: 2px;
+    }
+
+    .footer-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .footer-link {
+        color: var(--gray);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 400;
+        transition: var(--transition);
+        padding: var(--spacing-xs) 0;
+        position: relative;
+    }
+
+    .footer-link:hover {
+        color: var(--white);
+        transform: translateX(4px);
+    }
+
+    .footer-link::before {
+        content: '';
+        position: absolute;
+        left: -16px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 1px;
+        background-color: var(--primary);
+        transition: var(--transition);
+    }
+
+    .footer-link:hover::before {
+        width: 12px;
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: var(--spacing-xl);
+        text-align: center;
+    }
+
+    .footer-bottom-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--spacing-lg);
+    }
+
+    .footer-copyright {
+        font-size: 0.9rem;
+        color: var(--gray);
+    }
+
+    .footer-social {
+        display: flex;
+        gap: var(--spacing-md);
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--gray-light);
+        text-decoration: none;
+        border-radius: 50%;
+        transition: var(--transition);
+        font-size: 1rem;
+    }
+
+    .social-link:hover {
+        background-color: var(--primary);
+        color: var(--white);
+        transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .container-fluid {
+            padding: 0 var(--spacing-lg);
+        }
+        
+        .nav-menu {
+            gap: var(--spacing-md);
+        }
+        
+        .nav-link {
+            font-size: 0.9rem;
+            padding: var(--spacing-xs) var(--spacing-sm);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            min-height: 64px;
+        }
+        
+        .nav-container {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            display: block;
+        }
+
+        .mobile-menu {
+            top: 64px;
+            height: calc(100vh - 64px);
+        }
+
+        .profile-info {
+            display: none;
+        }
+
+        .hero-section {
+            padding: var(--spacing-xl) var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .footer-bottom-content {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .scroll-top-btn {
+            bottom: var(--spacing-lg);
+            right: var(--spacing-lg);
+            width: 48px;
+            height: 48px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 0 var(--spacing-md);
+        }
+        
+        .container-fluid {
+            padding: 0 var(--spacing-md);
+        }
+        
+        .header-container {
+            padding: var(--spacing-sm) 0;
+        }
+
+        .brand-name {
+            font-size: 1.25rem;
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .mobile-menu {
+            padding: var(--spacing-lg);
+        }
+
+        .hero-section {
+            padding: var(--spacing-lg);
+        }
+
+        .cta-button {
+            padding: var(--spacing-md) var(--spacing-lg);
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .brand-name {
+            font-size: 1.1rem;
+        }
+        
+        .logo {
+            height: 36px;
+        }
+    }
+
+    /* Animation Classes */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .slide-in-left {
+        opacity: 0;
+        transform: translateX(-30px);
+        animation: slideInLeft 0.6s ease-out forwards;
+    }
+
+    @keyframes slideInLeft {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Focus styles for accessibility */
+    .nav-link:focus,
+    .dropdown-link:focus,
+    .profile-dropdown-link:focus,
+    .mobile-nav-link:focus,
+    .footer-link:focus,
+    .cta-button:focus {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+        :root {
+            --gray: #6b7280;
+            --gray-light: #9ca3af;
+        }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="header-container">
+                <div class="logo-container">
+                    <img src="assets/logo.png" alt="Ambidextrous PM" class="logo">
+                    <span class="brand-name">Ambidextrous PM <sup>™</sup></span>
+                </div>
+
+                <nav class="nav-container">
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">
+                                <i class="fas fa-home"></i>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-info-circle"></i>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-cogs"></i>
+                                Solutions
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-link">
+                                    <i class="fas fa-rocket"></i>
+                                    Agile Transformation
+                                </a>
+                                <a href="#" class="dropdown-link">
+                                    <i class="fas fa-water"></i>
+                                    Waterfall Management
+                                </a>
+                                <a href="#" class="dropdown-link">
+                                    <i class="fas fa-layer-group"></i>
+                                    Hybrid Approach
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-link">
+                                    <i class="fas fa-chart-line"></i>
+                                    Portfolio Strategy
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-book"></i>
+                                Resources
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-calendar-alt"></i>
+                                Events
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-envelope"></i>
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="user-profile">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face&auto=format" alt="Samwel Karanja" class="profile-avatar">
+                        <div class="profile-info">
+                            <span class="profile-name">Samwel Karanja</span>
+                            <span class="profile-role">Project Manager</span>
+                        </div>
+
+                        <div class="profile-dropdown">
+                            <div class="profile-dropdown-header">
+                                <div class="profile-name">Samwel Karanja</div>
+                                <div class="profile-role">Project Manager</div>
+                            </div>
+                            <a href="#" class="profile-dropdown-link">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="#" class="profile-dropdown-link">
+                                <i class="fas fa-cog"></i>
+                                Settings
+                            </a>
+                            <a href="#" class="profile-dropdown-link">
+                                <i class="fas fa-question-circle"></i>
+                                Help & Support
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="profile-dropdown-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-menu">
+            <li class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link active">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    About
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <button class="mobile-dropdown-btn" id="solutionsDropdownBtn">
+                    <span>
+                        <i class="fas fa-cogs"></i>
+                        Solutions
+                    </span>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                </button>
+                <div class="mobile-dropdown-content" id="solutionsDropdown">
+                    <a href="#" class="mobile-dropdown-link">
+                        <i class="fas fa-rocket"></i>
+                        Agile Transformation
+                    </a>
+                    <a href="#" class="mobile-dropdown-link">
+                        <i class="fas fa-water"></i>
+                        Waterfall Management
+                    </a>
+                    <a href="#" class="mobile-dropdown-link">
+                        <i class="fas fa-layer-group"></i>
+                        Hybrid Approach
+                    </a>
+                    <a href="#" class="mobile-dropdown-link">
+                        <i class="fas fa-chart-line"></i>
+                        Portfolio Strategy
+                    </a>
+                </div>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">
+                    <i class="fas fa-book"></i>
+                    Resources
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    Events
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="#" class="mobile-nav-link">
+                    <i class="fas fa-envelope"></i>
+                    Contact
+                </a>
+            </li>
+            
+            <div class="mobile-user-section">
+                <div class="mobile-user-profile">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face&auto=format" alt="Samwel Karanja" class="profile-avatar">
+                    <div class="profile-info">
+                        <span class="profile-name">Samwel Karanja</span>
+                        <span class="profile-role">Project Manager</span>
+                    </div>
+                </div>
+                <li class="mobile-nav-item">
+                    <a href="#" class="mobile-nav-link">
+                        <i class="fas fa-user"></i>
+                        My Profile
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#" class="mobile-nav-link">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#" class="mobile-nav-link">
+                        <i class="fas fa-question-circle"></i>
+                        Help & Support
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#" class="mobile-nav-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="hero-section fade-in">
+                <h1 class="hero-title">Strategic Project Management Excellence</h1>
+                <p class="hero-subtitle">
+                    Bridging methodologies to deliver exceptional results through innovative project management solutions that adapt to your unique business needs.
+                </p>
+                <a href="#" class="cta-button">
+                    <i class="fas fa-rocket"></i>
+                    Get Started Today
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo slide-in-left">
+                        <img src="assets/logo.png" alt="Ambidextrous PM">
+                        <span class="footer-logo-text">Ambidextrous PM</span>
+                    </div>
+                    <p class="footer-description fade-in">
+                        Strategic project management solutions that bridge methodologies to deliver exceptional results. We specialize in creating adaptive frameworks that evolve with your business needs.
+                    </p>
+                </div>
+                <div class="footer-col fade-in">
+                    <h3 class="footer-title">Solutions</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Agile Transformation</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Waterfall Management</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Hybrid Approach</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Portfolio Strategy</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Risk Management</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col fade-in">
+                    <h3 class="footer-title">Company</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">About Us</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Our Team</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Careers</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Contact</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Press Kit</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col fade-in">
+                    <h3 class="footer-title">Resources</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Documentation</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Best Practices</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Case Studies</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Whitepapers</a>
+                        </li>
+                        <li class="footer-link-item">
+                            <a href="#" class="footer-link">Privacy Policy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        &copy; 2024 Ambidextrous Project Management. All rights reserved.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const solutionsDropdownBtn = document.getElementById('solutionsDropdownBtn');
+    const solutionsDropdown = document.getElementById('solutionsDropdown');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        const isActive = mobileMenu.classList.toggle('active');
+        mobileMenuBtn.innerHTML = isActive ? 
+            '<i class="fas fa-times"></i>' : 
+            '<i class="fas fa-bars"></i>';
+        
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = isActive ? 'hidden' : '';
+    });
+
+    // Mobile dropdown toggle
+    solutionsDropdownBtn.addEventListener('click', () => {
+        solutionsDropdownBtn.classList.toggle('active');
+        solutionsDropdown.classList.toggle('active');
+    });
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('active');
+        } else {
+            scrollTopBtn.classList.remove('active');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            mobileMenu.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Keyboard navigation support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = '';
+            mobileMenuBtn.focus();
+        }
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationDelay = '0.1s';
+                entry.target.style.animationFillMode = 'both';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.fade-in, .slide-in-left').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Header background on scroll
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 100) {
+            header.style.background = 'linear-gradient(135deg, rgba(2, 6, 23, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%)';
+            header.style.backdropFilter = 'blur(20px)';
+        } else {
+            header.style.background = 'linear-gradient(135deg, var(--darkest) 0%, var(--darker) 100%)';
+            header.style.backdropFilter = 'blur(10px)';
+        }
+        lastScrollY = window.scrollY;
+    });
+
+    // Performance optimization: Debounce scroll events
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Optimized scroll handler
+    const optimizedScrollHandler = debounce(() => {
+        // Scroll-based animations or effects can go here
+    }, 10);
+
+    window.addEventListener('scroll', optimizedScrollHandler);
+    </script>
+</body>
+
+</html>
