@@ -101,12 +101,12 @@
     .brand-section {
         display: flex;
         align-items: center;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-xs);
         flex-shrink: 0;
     }
 
     .company-logo {
-        height: 15rem;
+        height: 80px;
         width: auto;
         transition: var(--transition);
         filter: brightness(1.1);
@@ -137,14 +137,14 @@
     .navigation-section {
         display: flex;
         align-items: center;
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
         margin-left: auto;
     }
 
     .primary-nav {
         display: flex;
         list-style: none;
-        gap: var(--spacing-md);
+        gap: var(--spacing-xs);
         align-items: center;
     }
 
@@ -250,7 +250,7 @@
     .account-section {
         display: flex;
         align-items: center;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-xs);
         cursor: pointer;
         position: relative;
         padding: var(--spacing-xs);
@@ -265,8 +265,8 @@
     }
 
     .user-avatar {
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         object-fit: cover;
         border: 2px solid var(--primary);
@@ -288,13 +288,13 @@
     .user-fullname {
         color: var(--white);
         font-weight: 600;
-        font-size: 0.85rem;
-        line-height: 1.2;
+        font-size: 0.8rem;
+        line-height: 1.1;
     }
 
     .user-position {
         color: var(--gray);
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         font-weight: 400;
     }
 
@@ -586,7 +586,7 @@
     /* Responsive Design */
     @media (max-width: 1200px) {
         .company-logo {
-            height: 12rem;
+            height: 70px;
         }
         
         .company-title {
@@ -600,15 +600,15 @@
         }
 
         .company-logo {
-            height: 10rem;
+            height: 60px;
         }
 
         .primary-nav {
-            gap: var(--spacing-sm);
+            gap: var(--spacing-xs);
         }
 
         .nav-anchor {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             padding: var(--spacing-xs);
         }
     }
@@ -619,7 +619,7 @@
         }
 
         .company-logo {
-            height: 8rem;
+            height: 50px;
         }
 
         .company-title {
@@ -671,7 +671,7 @@
         }
 
         .company-logo {
-            height: 6rem;
+            height: 40px;
         }
 
         .company-title {
@@ -698,7 +698,7 @@
 
     @media (max-width: 360px) {
         .company-logo {
-            height: 5rem;
+            height: 36px;
         }
 
         .company-title {
