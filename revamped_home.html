@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Ambidextrous PM – Home</title>
+
+  <!-- Tailwind via CDN (PRODUCTION-ready build) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind custom palette -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1a365d", // deep indigo
+            accent: {
+              400: "#d69e2e",
+              300: "#f6e05e",
+            },
+          },
+          fontFamily: {
+            sans: ["Montserrat", "ui-sans-serif", "system-ui"],
+          },
+        },
+      },
+    };
+  </script>
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Font-Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-xh6gf7P4JhKZ9n+YDi1Ur6LkKY0lXrhN5n52y3wL9Ucx+Jv1uSIBJF7wvK9W90Ynv6QdTNWL3OOjelI+xgrrQQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    /* Gradient helpers */
+    .btn-gradient {
+      @apply bg-gradient-to-br from-accent-400 to-accent-300 text-primary font-bold shadow-lg shadow-accent-400/30 hover:shadow-xl hover:-translate-y-0.5 transition;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #d69e2e 0%, #f6e05e 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-200 bg-primary/95 selection:bg-accent-400/70">
+  <!-- HEADER / NAV -->
+  <header class="fixed inset-x-0 top-0 z-50 backdrop-blur bg-primary/80 border-b border-accent-400/10">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#home" class="text-lg font-extrabold tracking-tight whitespace-nowrap">
+        <span class="text-gradient">TAPM</span>
+      </a>
+      <nav class="hidden md:flex gap-8 font-semibold">
+        <a href="#sustainability" class="hover:text-accent-300">Sustainability</a>
+        <a href="#community" class="hover:text-accent-300">Community</a>
+        <a href="#solutions" class="hover:text-accent-300">Solutions</a>
+        <a href="#approach" class="hover:text-accent-300">Framework</a>
+      </nav>
+      <a href="#connect" class="btn-gradient px-4 py-2 rounded-full text-sm">Contact</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section
+    id="home"
+    class="relative min-h-screen flex items-center justify-center text-center bg-cover bg-center before:absolute before:inset-0 before:bg-black/60"
+    style="background-image:url('https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1470&q=80');"
+  >
+    <div class="relative z-10 max-w-4xl px-6 pt-24 pb-10">
+      <h1 class="text-5xl md:text-6xl font-black mb-6 leading-tight">
+        <span class="text-gradient">The Ambidextrous Project Manager™</span>
+      </h1>
+      <p class="text-xl md:text-2xl mb-10">Your Greatest Project is <span class="font-bold">YOU</span> — Lead It with Impact. Lead It Sustainably.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#solutions" class="btn-gradient px-8 py-4 rounded-full">Explore TAPM</a>
+        <a href="#connect" class="px-8 py-4 rounded-full border-2 border-white hover:bg-white hover:text-primary transition font-bold">Contact Us</a>
+        <a href="#book" class="btn-gradient px-8 py-4 rounded-full">Grab the Book</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 text-white/90">
+        <div>
+          <h3 class="text-3xl font-bold">GLOBAL FORUM</h3>
+        </div>
+        <div>
+          <h3 class="text-3xl font-bold">EXPERIENCE</h3>
+        </div>
+        <div>
+          <h3 class="text-3xl font-bold">Ambidextrous+</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUSTAINABILITY -->
+  <section id="sustainability" class="bg-primary py-24">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+        <span class="text-gradient">Sustainability</span>
+      </h2>
+      <p class="text-xl mb-16 text-gray-300">Every TAPM member contributes to a<strong> shared value cycle</strong>, emphasising:</p>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Item template -->
+        <button onclick="openPopup('environmental')" class="group bg-primary/60 border border-white/10 p-8 rounded-xl hover:-translate-y-1 hover:shadow-lg transition text-left">
+          <div class="text-4xl text-accent-400 mb-6"><i class="fas fa-leaf"></i></div>
+          <h3 class="text-2xl font-bold mb-2">Environmental Awareness</h3>
+          <p class="text-gray-300 mb-4">Through green PM tools</p>
+          <span class="inline-flex items-center gap-1 text-accent-300 font-semibold">Learn more <i class="fas fa-arrow-right text-sm"></i></span>
+        </button>
+
+        <button onclick="openPopup('social')" class="group bg-primary/60 border border-white/10 p-8 rounded-xl hover:-translate-y-1 hover:shadow-lg transition text-left">
+          <div class="text-4xl text-accent-400 mb-6"><i class="fas fa-users"></i></div>
+          <h3 class="text-2xl font-bold mb-2">Social Empowerment</h3>
+          <p class="text-gray-300 mb-4">Mentoring • Grassroots training • Youth-led projects</p>
+          <span class="inline-flex items-center gap-1 text-accent-300 font-semibold">Learn more <i class="fas fa-arrow-right text-sm"></i></span>
+        </button>
+
+        <button onclick="openPopup('governance')" class="group bg-primary/60 border border-white/10 p-8 rounded-xl hover:-translate-y-1 hover:shadow-lg transition text-left">
+          <div class="text-4xl text-accent-400 mb-6"><i class="fas fa-balance-scale"></i></div>
+          <h3 class="text-2xl font-bold mb-2">Governance Transparency</h3>
+          <p class="text-gray-300 mb-4">Clear roles • Impact dashboards • Inclusive decisions</p>
+          <span class="inline-flex items-center gap-1 text-accent-300 font-semibold">Learn more <i class="fas fa-arrow-right text-sm"></i></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPUP TEMPLATE -->
+  <div id="popupContainer" class="fixed inset-0 bg-black/80 backdrop-blur-sm items-center justify-center hidden">
+    <div class="relative bg-gradient-to-br from-accent-300 to-accent-400 max-w-lg w-full mx-4 p-10 rounded-2xl text-primary shadow-xl">
+      <button onclick="closePopup()" class="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-primary text-accent-300 flex items-center justify-center shadow-lg hover:scale-110 transition">
+        <i class="fas fa-times"></i>
+      </button>
+      <h3 id="popupTitle" class="text-3xl font-extrabold mb-4"></h3>
+      <div id="popupContent" class="text-primary space-y-4"></div>
+    </div>
+  </div>
+
+  <!-- COMMUNITY (shortened) -->
+  <section id="community" class="bg-primary/95 py-24">
+    <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <span class="uppercase tracking-widest text-accent-300 font-bold text-sm">Community</span>
+        <h2 class="text-4xl font-extrabold mt-4">A Professional Home for
+          <span class="text-gradient">Ambidextrous Leaders</span>
+        </h2>
+        <p class="mt-6 text-gray-300">Join a standards-driven network of practitioners, mentors & change-makers. Learn, collaborate, and lead projects that create measurable impact — locally and globally.</p>
+        <div class="grid grid-cols-2 gap-4 mt-10 text-sm font-semibold">
+          <span class="flex items-center gap-2 bg-white/5 py-2 px-4 rounded-full"><i class="fas fa-user-friends"></i>Mentorship Circles</span>
+          <span class="flex items-center gap-2 bg-white/5 py-2 px-4 rounded-full"><i class="fas fa-globe"></i>Global Chapters</span>
+          <span class="flex items-center gap-2 bg-white/5 py-2 px-4 rounded-full"><i class="fas fa-chalkboard-teacher"></i>Masterclasses</span>
+          <span class="flex items-center gap-2 bg-white/5 py-2 px-4 rounded-full"><i class="fas fa-tasks"></i>Project Labs</span>
+        </div>
+        <div class="flex gap-4 mt-10">
+          <a href="#connect" class="btn-gradient px-6 py-3 rounded-full">Join Community</a>
+          <a href="#solutions" class="border-2 border-white px-6 py-3 rounded-full font-bold hover:bg-white hover:text-primary transition">Programs</a>
+        </div>
+      </div>
+      <!-- Placeholder 3D globe -->
+      <div class="relative w-full h-80 bg-[url('https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center rounded-xl border-2 border-accent-400/20 shadow-lg overflow-hidden">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-accent-300 font-extrabold text-3xl animate-pulse">Loading&nbsp;Globe…</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-primary/90 border-t border-accent-400/10 py-10 text-center text-sm">
+    © <span id="year"></span> The Ambidextrous Project Manager™. All rights reserved.
+  </footer>
+
+  <!-- JS: year + popup -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const POPUPS = {
+      environmental: {
+        title: "Environmental Awareness",
+        html: `<ul class="list-disc ml-6 space-y-2 text-sm"><li>Assess environmental impact of decisions</li><li>Implement sustainable resource management</li><li>Reduce carbon footprint via digital collaboration</li><li>Promote eco-friendly methodologies</li></ul>`
+      },
+      social: {
+        title: "Social Empowerment",
+        html: `<ul class="list-disc ml-6 space-y-2 text-sm"><li>Mentoring programmes for young professionals</li><li>Grassroots training in underserved communities</li><li>Youth-led project initiatives</li><li>Cross-cultural collaboration</li></ul>`
+      },
+      governance: {
+        title: "Governance Transparency",
+        html: `<ul class="list-disc ml-6 space-y-2 text-sm"><li>Clear roles & responsibilities</li><li>Real-time impact dashboards</li><li>Inclusive decision-making</li><li>Open communication channels</li></ul>`
+      }
+    };
+
+    function openPopup(key) {
+      const data = POPUPS[key];
+      if (!data) return;
+      document.getElementById("popupTitle").innerText = data.title;
+      document.getElementById("popupContent").innerHTML = data.html;
+      document.getElementById("popupContainer").classList.remove("hidden");
+    }
+
+    function closePopup() {
+      document.getElementById("popupContainer").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
